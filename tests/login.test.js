@@ -2,6 +2,7 @@ import http from "k6/http";
 import { sleep, check } from "k6";
 
 export const options = {
+    //usuarios virtuais
   vus: 10,
   duration: '30s',
   thresholds: {
@@ -25,6 +26,7 @@ export default function () {
     };
 
     const res = http.post(url, payload, params);
+
     check(res, {
         'Validar que o Status code é 200': (r) => r.status === 200,
         'Validar que o token é string': (r) => typeof(r.json().token) === 'string'
